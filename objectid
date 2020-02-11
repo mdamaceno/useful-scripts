@@ -7,3 +7,8 @@ hex() {
 }
 
 echo $(hex)
+
+rand=$(($RANDOM % 9))
+
+# echo 'xxxxxxxxxxxxxxxx' | sed -e s/[x]/$rand/g
+echo $(expr `$rand`)
