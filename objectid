@@ -2,13 +2,39 @@
 
 set -e
 
-hex() {
+dateHex() {
   printf '%x' $(date +%s)
 }
 
-echo $(hex)
+randomHex() {
+  printf '%x' $1
+}
 
-rand=$(($RANDOM % 9))
+str=''
+count1=0
+count2=0
 
-# echo 'xxxxxxxxxxxxxxxx' | sed -e s/[x]/$rand/g
-echo $(expr `$rand`)
+while [ $count1 -lt 16 ]
+do
+  if [ $count1 == 0 ]
+  then
+    str+=1
+  else
+    str+="$(($RANDOM % 10))"
+  fi
+  count1=`expr $count1 + 1`
+done
+
+part1=`dateHex`
+part2=`randomHex $str`
+finalStr="$part1$part2"
+
+while [ $count2 -lt $(expr $(expr 24 - $(expr length "${part1}")) - $(expr length "${part2}")) ]
+do
+  finalStr+="$(($RANDOM % 10))"
+  count2=`expr $count2 + 1`
+done
+
+echo "$finalStr"
+
+exit 0
