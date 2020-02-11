@@ -2,13 +2,8 @@
 
 set -e
 
-timestamp() {
-  echo '('`date +"%s.%N"` ' * 1000000)/1' | bc
-  # echo $(date +%s)
-}
-
 hex() {
-  echo $(expr $(timestamp) \/ 1000)
+  printf '%x' $(date +%s)
 }
 
-echo "obase=16; $(hex)"| bc
+echo $(hex)
